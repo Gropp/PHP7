@@ -18,3 +18,10 @@ function test2(){
 }
 test(); // chamada da funcao 1
 test2(); // chamada da funcao 2
+
+$a = NULL;
+$b = NULL;
+$c = 10;
+//o echo so vai mostrar a variavel que nao for nula! e para na primeira que encontrar
+// neste caso vai mostrar 10
+echo $a ?? $b ?? $c 
