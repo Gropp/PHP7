@@ -2,7 +2,7 @@
 
 Repositorio de codigos
 
-Este repositório tem a finalidade de disponibilizar os codigos criados durante o desenvolvimento do projeto Plataforma Sustentável.
+Este repositório tem a finalidade de disponibilizar os codigos criados durante o curos de PHP para o futuro desenvolvimento do projeto Plataforma Sustentável.
 
 Um projeto de coleta e tratamento de dados voltados a informações de sustentabilidade de empresas que queiram aderir ao protocolo GRI e/ou equivalentes.
 
