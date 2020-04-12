@@ -1,8 +1,8 @@
 <?php
 //verifica se um numero foi informado
 if (empty($cpf)) return false;
-//elimina possiveis mascaras
-$cpf = preg_replace('[^0-9]', '', $cpf);
+//elimina possiveis mascaras - concerto do REGEX '[^0-9]'
+$cpf = preg_replace('/[^0-9]/', '', $cpf);
 $cpf = str_pad($cpf, 11, '0', STR_PAD_LEFT);
 //verifica se o numero de digitos informados é igual a 11
 if (strlen($cpf) != 11) {
