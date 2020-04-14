@@ -1,7 +1,7 @@
 <?php
-$nome = "hcode";
-$nome2 = 'treinamentos';
-$frase = "E na bunada nao vai dinha?";
+$nome = "PHP";
+$nome2 = 'treinamento';
+$frase = "Quem nao pode vai de bus!";
 $frase2 = 'Cada "macaco" no seu "Galho"';
 $palavra = "vai";
 //O PHP FAZ A INTERPOLACAO DE STRINGS
@@ -49,7 +49,7 @@ echo "<br/>";
 echo $subpossem;
 echo "<br/>";
 echo addslashes($frase2);
-$cpf = "858.695.389-04";
+$cpf = "111.222.333-44";
 echo "<br/>";
 echo $cpf;
 $cpf = preg_replace('/[^0-9]/', '', $cpf);

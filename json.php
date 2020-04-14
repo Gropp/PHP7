@@ -5,7 +5,7 @@ array_push($pessoas, array(
     'idade' => 20
 ));
 array_push($pessoas, array(
-    'nome' => 'Fernando',
+    'nome' => 'Pedro',
     'idade' => 30
 ));
 ?>
@@ -20,7 +20,7 @@ print('<br/>');
 echo json_encode($pessoas);
 print('<br/>');
 //transformar um objeto Json em Matriz
-$json = '[{"nome":"João","idade":20},{"nome":"Fernando","idade":30}]';
+$json = '[{"nome":"João","idade":20},{"nome":"Pedro","idade":30}]';
 //a opçao true é para transformar todo a string em array, sem o true ele vira um objeto
 $data = json_decode($json, true);
 var_dump($data);

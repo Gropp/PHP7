@@ -10,6 +10,7 @@ if (strlen($cpf) != 11) {
 }
 //verifica se nenhuma das sequencias invalidas abaixo foi digitada. caso afirmativo retorna falso 
 elseif (
+    $cpf == '00000000000' ||
     $cpf == '11111111111' ||
     $cpf == '22222222222' ||
     $cpf == '33333333333' ||

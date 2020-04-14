@@ -15,9 +15,9 @@ function ola2($txt = "padrao")
 }
 echo ola2();
 echo ola2("");
-echo ola2("Fernando");
-echo ola2("Elisa");
-echo ola2("Henrique");
+echo ola2("Jose");
+echo ola2("Maria");
+echo ola2("Joao");
 //function doisp($txt1, $txt2)
 //sem valores padrao, coloque a esquerda os obrigatorios
 //function doisp($txt1, $txt2="pad2")

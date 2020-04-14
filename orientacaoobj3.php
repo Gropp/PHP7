@@ -76,6 +76,6 @@ class Documento {
     }
 }
 $cpf = new Documento();
-$cpf->setNumero("043.519.979-07");
+$cpf->setNumero("111.222.333-44");
 //se o CPF estiver errado o programa da a mensagem de erro e o getNumero volta nulo
 if($cpf->getNumero() !== null) var_dump($cpf->getNumero());

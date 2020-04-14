@@ -4,9 +4,9 @@ while($condicao)
 {
     //numero randomico entre 1 e 10
     $numero = rand(1, 10);
-    if($numero === 3)
+    if($numero === 5)
     {
-        print 'Tres!!!! ';
+        print 'BINGO!';
         $condicao = false;
     }
     echo "$numero ";

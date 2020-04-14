@@ -15,5 +15,5 @@ class Pessoa {
 //instanciando a classe e criando um objeto com os atributos e metodos da classe
 //IMPORTANTE: metodo construtor o parenteses do () ao chamar a class $alguem = new Pessoa tambem funciona!!!
 $alguem = new Pessoa();
-$alguem->nome = "Glaucio Daniel";//carrega o atributo nome
+$alguem->nome = "Pedro da Silva";//carrega o atributo nome
 echo $alguem->falar();//chama o metodo falar e mostra o valor - nao da para dar echo só em $alguem, pois é um objeto, da erro!!!

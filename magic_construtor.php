@@ -21,11 +21,11 @@ class Endereco {
     }
     //para destruir um objeto e liberar memoria do servidor magic __destruct
     public function __destruct(){
-        //var_dump("DESTRUIR");
+        //var_dump("ACABOU");
     }
 }
 //chamada do __construct
-$meuEndereco = new Endereco("Rua Elpidio Alves", "72", "ap.101","Curitiba");
+$meuEndereco = new Endereco("Rua dos Bobos", "0", "Sem teto","Lua");
 echo $meuEndereco;
 //var_dump($meuEndereco);
 //chamada do __destruct

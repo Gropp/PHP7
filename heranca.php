@@ -1,8 +1,8 @@
 <?php
 class Pessoa {
     //atributos PUBLICO/PROTEGIDO/PRIVADO
-    public $nome = "Rasmus Lerdorf";
-    protected $idade = 48;
+    public $nome = "Roberto Carlos";
+    protected $idade = 80;
     private $senha = "123456";
     //metodos PUBLICO DENTRO DA CLASSE PESSOA
     public function verDados(){

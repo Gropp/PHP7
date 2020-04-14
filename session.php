@@ -7,4 +7,4 @@
 //arquivos .inc nao sao seguros - includes
 //session_start();
 require_once("config.php");
-$_SESSION["nome"] = "Hcode";
+$_SESSION["nome"] = "datarde";
