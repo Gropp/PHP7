@@ -9,17 +9,17 @@ class Sql extends PDO {
         $this->conn = new PDO("mysql:host=localhost;dbname=dbphp7","user","senha");
     }
     //METODO PARA TRATAR O STATMENT E VARIOS PARAMETROS, LIGAR. CRIA OS BINDPARAM, ENTRE VARIAVEIS E IDS - É PRIVADA POIS NAO TEM PORQUE SER ACESSADA DE FORA DA CLASSE
-    private function setParams($statment, $parameters = array()){
+    private function setParams($statement, $parameters = array()){
         //vamos varrer o array $params coletando os diversos parametros que podem vir como requisitos do comando sql - os valores que complementam o comando sql (nome da tabela, dados a serem inseridos, dados para where, entre outros)
         foreach ($parameters as $key => $value){
             //PARA AGILIZAR O CODIGO E NAO DUPLICAR O COMANDO BINDPARAM, O FOREACH A CADA LOOP, JA QUE É UM COMANDO POR ITERACAO, ELE CHAMA O METODO QUE CRIAMOS PARA TRATAR UM SÓ PARAMETRO METODO PRIVADO SETPARAM
-            $this->setParam($key, $value);
+            $this->setParam($statement, $key, $value);
         }
     }
     //METODO PARA TRATAR O STATMENT E UM PARAMETRO, LIGAR. CRIA OS BINDPARAM, ENTRE VARIAVEIS E IDS - É PRIVADA POIS NAO TEM PORQUE SER ACESSADA DE FORA DA CLASSE
-    private function setParam($statment, $key, $value){
+    private function setParam($statement, $key, $value){
         //O METODO RECEBE O ID E O VALOR DELE E CHAMA O METODO DO PDO BINDPARAM QUE FAZ A LIGACAO
-        $statment->bindParam($key, $value);
+        $statement->bindParam($key, $value);
     }
     //METODO PARA COMANDOS SQL
     //$rawQuery - uma query bruta (comandos SELECT/DELETE/INSERT/...) do bd a ser tratada
