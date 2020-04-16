@@ -10,7 +10,7 @@
 require_once("config.php");
 //vamos criar o objeto $sql chamando a classe Sql que criamos e esta sendo carregada no autoload do config.php
 
-/* ESSES COMANDOS FUNCIONAN, MAS AGORA VAMOS USAR A CLASSE USUARIO PARA FAZER AS OPERACOES NO BANCO
+/* ESSES COMANDOS FUNCIONAN, MAS AGORA VAMOS USAR A CLASSE DBTBUSUARIOS PARA FAZER AS OPERACOES NO BANCO
 $sql = new Sql();
 //vamos carregar a variavel usuarios com o retorno do select da tabela de usuarios do banco de dados - chamando o metodo select e passando os parametros
 $usuarios = $sql->select("SELECT * FROM tb_usuarios");
@@ -60,3 +60,11 @@ $aluno = new DBTbUsuarios();
 $aluno->insert("aluno","4lun0"); //COM O METODO CONSTRUTOR
 //COMO A STORE PROCEDURE QUE CRIAMOS RETORNA UM SELECT DO ULTIMO ID INCLUIDO NA TABELA, E O METODO DBTbUsuarios TEM A FUNCAO MAGICA __TOSTRING COM JSON, PODEMOS MOSTRAR ESSE RETORNO COM UM ECHO!
 echo $aluno;
+//FAZENDO UM UPDATE EM UM USUARIO
+//INSTANCIA A CLASSE DBTBUSUARIOS
+$alter = new DBTbUsuarios();
+//CARREGA O REGISTRO QUE VOCE QUER ALTERAR PARA CARREGAR O ATRIBUTO IDUSUARIO, QUE É ATRIBUIDO DURANTE O SELECT
+$alter->loadById("idusuario");
+//ENTAO CHAMA O METODO UPDATE COM OS DADOS PARA SEREM ALTERADOS, E O METODO UPDATE UTILIZA O $this->getIdusuario PARA PEGAR O ID DO USUARIO CORRENTE E USAR NO FILTRO DO WHERE 
+$alter->update("professor","%$#54332#");
+echo $alter;
