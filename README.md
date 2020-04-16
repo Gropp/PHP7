@@ -5,7 +5,8 @@ Repositorio de codigos PHP7
 Este repositório tem a finalidade de disponibilizar os codigos criados durante o estudo de PHP7.
 
 Fundamentos Básicos
-Funcamentos Intermediarios
+Fundamentos Intermediários
+Fundamentos Avançados
 Banco de Dados
     MySQLi
     PDO
@@ -15,4 +16,4 @@ Este repositório está em desenvolvimento, então será atualizado com alguma r
 
 ===================================================================================
 
-Fgropp
+Fgropp - ABR/2020
