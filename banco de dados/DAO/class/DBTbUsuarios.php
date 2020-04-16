@@ -141,7 +141,21 @@ class DBTbUsuarios {
         $sql->query("UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :PASSWD WHERE idusuario = :ID", array(':LOGIN'=>$this->getDeslogin(), ':PASSWD'=>$this->getDessenha(), ':ID'=>$this->getIdusuario()));
         }
     }
-
+    //CRIAR UMA FUNCAO DELETE NA TABELA TB_USUARIO
+    //IMPORTANTE:
+    //O METODO VAI SIMPLESMENTE EXECUTAR UMA AÇÃO NO BANCO
+    public function delete(){
+        //INSTANCIA A CLASSE SQL CARREGADA NO INDEX.PHP ATRAVES DO CONFIG.PHP COM O AUTOLOAD
+        $sql = new Sql();
+        //NESTE EXEMPLO O METODO DELETE VAI CHAMAR DIRETAMENTE O METODO QUERY DO PDO PASSANDO OS VALORES DOS ATRIBUTOS PASSADOS PELA CHAMADO DO SELECT
+        $sql->query("DELETE tb_usuarios WHERE idusuario = :ID", array( ':ID'=>$this->getIdusuario()));
+        //IMPORTANTE:
+        //APOS DESTRUIR O REGISTRO NA BASE DE DADOS PRECISAMOS ZERAR OS VALORES GUARDADOS NOS ATRIBUTOS DA CLASSE - PARA NAO TER UMA MEMORIA DE ALGO QUE JA NAO EXISTE NO CONTEXTO DO PROGRAMA - USAMOS PARA ISSO OS METODOS SETERS CRIADOS
+        this->setIdusuario(0);
+        this->setDeslogin("");
+        this->setDessenha("");
+        this->setDtcadastro(new DateTime());
+    }
     /////////////////////////////////////////////////////////////////////////////////////
     //          FUNCOES CONSTRUTORAS DESSA CLASSE - EXECUTAM AUTOMATICAMENTE           //
     /////////////////////////////////////////////////////////////////////////////////////
