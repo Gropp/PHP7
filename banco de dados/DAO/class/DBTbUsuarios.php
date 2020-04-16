@@ -128,6 +128,19 @@ class DBTbUsuarios {
             $this->setData($results[0]);
         }
     }
+    //CRIAR UMA FUNCAO UPDATE NA TABELA TB_USUARIO
+    //IMPORTANTE:
+    //O METODO VAI SIMPLESMENTE EXECUTAR UMA AÇÃO NO BANCO
+    public function update($login, $passwd){
+        //CARREGA OS ATRIBUTOS DA CLASSE COM OS ARGUMENTOS CHAMANDO OS SETERS
+        $this->setDeslogin($login);
+        $this->setDessenha($passwd);
+        //INSTANCIA A CLASSE SQL CARREGADA NO INDEX.PHP ATRAVES DO CONFIG.PHP COM O AUTOLOAD
+        $sql = new Sql();
+        //NESTE EXEMPLO O METODO SELECT VAI CHAMAR DIRETAMENTE O METODO QUERY DO PDO PASSANDO OS VALORES GRAVADOS ACIMA NOS ATRIBUTOS COMO PARAMENTROS PARA O INSERT
+        $sql->query("UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :PASSWD WHERE idusuario = :ID", array(':LOGIN'=>$this->getDeslogin(), ':PASSWD'=>$this->getDessenha(), ':ID'=>$this->getIdusuario()));
+        }
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////
     //          FUNCOES CONSTRUTORAS DESSA CLASSE - EXECUTAM AUTOMATICAMENTE           //
