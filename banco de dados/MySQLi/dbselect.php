@@ -1,7 +1,7 @@
 <?php
 //CONEXAO COM UM BANCO DE DADOS ATRAVES DA CLASSE MYSQLI, POR SER NATIVA DO PHP ESSA CLASSE É TODA EM MINUSCULA
 //CRIA UM OBJETO COM ESSA CLASS, PASSANDO OS PARAMETROS (SERVIDOR, USUARIO, SENHA, BANCODESEJADO)
-$conn = new mysqli("localhost","user","senha","dbphp7");
+$conn = new mysqli("localhost","user","passwd","dbphp7");
 //TRATAR ERRO DE CONEXAO
 if($conn->connect_error) {
     echo "Error: ".$conn->connect_error;
@@ -12,6 +12,8 @@ $result = $conn->query("SELECT * FROM tb_usuarios ORDER BY deslogin");
 $data = array();
 //AGORA VAMOS PERCORRER ESSE ARRAY USANDO O METODO FETCH_ARRAY QUE RETORNA UM DADO SE ELE EXISTIR - E JOGAMOS EM UMA VARIAVEL ATE O EOF (END OF FILE) ARRAY VAZIO É = FALSE, ENTAO O WHILE É ENCERRADO
 //ASSIM O WHILE TRAZ TODO O ARRAY - INDICE E CONTEUDO DE CADA CAMPO ["IDUSUARIO"]["1"]...
+/*
+//OPÇOES DE NAVEGACAO NO ARRAY RESULTADO $result
 while ($row = $result->fetch_array()) {
     //VAI APENDANDO CADA LOOP EMBAIXO DO ARRAY
     array_push($data, $row);
@@ -23,11 +25,11 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
     array_push($data, $row);
     var_dump($row);
 }
-//OU
+*/
 while ($row = $result->fetch_assoc()) {
     //VAI APENDANDO CADA LOOP EMBAIXO DO ARRAY
     array_push($data, $row);
-    var_dump($row);
+    //var_dump($row);
 }
 //JOGANDO A VARIAVEL $data PARA O FORMATO JSON PARA SE NECESSARIO EXPORTAR O RESULTADO OU PARA MANDAR PARA O JS, OU OUTRA FORMA DE FORMATAR ESSE DADOS E MOSTRAR NO SITE
 echo json_encode($data);
