@@ -8,28 +8,28 @@ class DBTbUsuarios {
     private $dessenha;
     private $dtcadastro;
     //GET(LER)-SET(ATRIBUIR)
-    public funcion getIdusuario(){
+    public function getIdusuario(){
         return $this->idusuario;
     }
-    public funcion setIdusuario($value){
+    public function setIdusuario($value){
         $this->idusuario = $value;
     }
-    public funcion getDeslogin(){
+    public function getDeslogin(){
         return $this->deslogin;
     }
-    public funcion setDeslogin($value){
+    public function setDeslogin($value){
         $this->deslogin = $value;
     }
-    public funcion getDessenha(){
+    public function getDessenha(){
         return $this->dessenha;
     }
-    public funcion setDessenha($value){
+    public function setDessenha($value){
         $this->dessenha = $value;
     }
-    public funcion getDtcadastro(){
+    public function getDtcadastro(){
         return $this->dtcadastro;
     }
-    public funcion setDtcadastro($value){
+    public function setDtcadastro($value){
         $this->dtcadastro = $value;
     }
     public function setData($data){
@@ -39,7 +39,7 @@ class DBTbUsuarios {
         $this->setDeslogin($data['deslogin']);
         $this->setDessenha($data['dessenha']);
         //CONVERTEMOS A DATA PARA UM FORMATO MAIS AMIGAVEL
-        $this->setIDtcadastro(new DateTime($data['dtcadastro']));
+        $this->setDtcadastro(new DateTime($data['dtcadastro']));
     }
     //METODOS PARA MANIPULACAO DA TABELA TB_USUARIOS NO DB DBPHP7
     //SELECT PELO ID DO USUARIO
@@ -72,16 +72,18 @@ class DBTbUsuarios {
     //IMPORTANTE: USO DE METODO STATIC
     //FAZ UM SELECT SEM WHERE E GERA UMA LISTA DE DADOS COM TODOS OS USUARIOS
     //ESSE METODO PODE SER ESTATICO POIS NAO TRABALHA COM ATRIBUTOS $THIS DENTRO DELE, A VANTAGEM DE UM METODO SER ESTATISCO É QUE ELE NAO PRECISA SER INSTANCIADO NA CHAMADA, VOCE PODE ACESSAR DIRETO O METODO DESTE OBJETO COM ::
-    public static function getList(){
+    public static function getList($filtro="1"){
         //CRIA A INSTANCIA DA CLASSE SQL
         $sql = new Sql();
-        //RETORNA UM SELECT GERAL ORDENADO POR DESLOGIN
+        //RETORNA UM SELECT GERAL ORDENADO POR $filtro PODE SER O NUMERO OU O NOME DA COLUNA, SE NAO PUSER NADA O DEFAULT É 1
         //IMPORTANTE: TESTAR O PONTO E VIRGULA NO FINAL DO COMANDO - É OPCIONAL?
-        return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin;");
+        return $sql->select("SELECT * FROM tb_usuarios ORDER BY $filtro");
     }
     //SELECT PARA LOCALIZAR UM USUARIO PELO LOGIN
     //ESSE METODO TAMBEM NAO TRABALHA COM ATRIBUTOS DIRETAMENTE ($this), ENTAO TAMBEM PODEMOS FAZER ELE SER STATIC
     public static function search($login){
+        //CRIA A INSTANCIA DA CLASSE SQL
+        $sql = new Sql();
         //O "%$login%" É A MASCARA DO LIKE, PROCURA TUDO QUE TENHA O VALOR DE LOGIN DENTRO DA TABELA NO CAMPO DESLOGIN
         //O METODO SELECT("SQL","PARAMETROS")
         return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(':SEARCH'=>"%".$login."%"));
@@ -98,6 +100,7 @@ class DBTbUsuarios {
         $results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWD", array(":LOGIN"=>$login, ":PASSWD"=>$password));
         //TESTAMOS SE O RESULT, resultou em alguma coisa, entao testamos o indice [0] do array existe/tem conteudo, com o isset (true ou false), ou contado o array count
         //if(isset($results[0])) ou
+        /*
         if(count($results)>0){
             //PEGA O CONTEUDO DO ARRAY DENTRO DO ARRAY RESULTS E COLOCA NO ARRAY DE 1 NIVEL CHAMADO $ROW.
             //$RESULTS[[IDUSUARIO,DESLOGIN,DESSENHA,DTCADASTRO]]
@@ -106,8 +109,19 @@ class DBTbUsuarios {
             $this->setData($results[0]);
         } else {
             //FIXME: SE DER ERRO ESSA LINHA, TEM QUE TRATAR COM TRY/CATCH - ORIENTACAOOBJ3.PHP TEM UM EXEMPLO - DEU ERRO NO LINUX NA ULTIMA VEZ QUE FOI USADO!!!
+            //o throw joga essa mensagem no arquivo de DUMP do servidor
             throw new Exception("Login e/ou Senha invalidos.");
         }
+        */
+        try {
+            if(count($results)<=0) {
+                throw new Exception("USUARIO OU SENHA INVALIDOS!");
+            }else{
+                $this->setData($results[0]);
+            }    
+        }catch (Exception $e){
+            echo $e->getMessage();
+        } 
     }
     //CRIAR UMA FUNCAO INSERT NA TABELA TB_USUARIO
     //ESSE METODO NAO TEM ARGUMENTOS, ENTAO ANTES DE CHAMA-LO É PRECISO FAZER OS SETERS DOS ATRIBUTOS DESLOGIN E DESSENHA NO ARQUIVO DE ORIGEM (QUE CHAMA ESSA CLASSE/METODO)!!!
@@ -139,7 +153,6 @@ class DBTbUsuarios {
         $sql = new Sql();
         //NESTE EXEMPLO O METODO SELECT VAI CHAMAR DIRETAMENTE O METODO QUERY DO PDO PASSANDO OS VALORES GRAVADOS ACIMA NOS ATRIBUTOS COMO PARAMENTROS PARA O INSERT
         $sql->query("UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :PASSWD WHERE idusuario = :ID", array(':LOGIN'=>$this->getDeslogin(), ':PASSWD'=>$this->getDessenha(), ':ID'=>$this->getIdusuario()));
-        }
     }
     //CRIAR UMA FUNCAO DELETE NA TABELA TB_USUARIO
     //IMPORTANTE:
@@ -148,13 +161,13 @@ class DBTbUsuarios {
         //INSTANCIA A CLASSE SQL CARREGADA NO INDEX.PHP ATRAVES DO CONFIG.PHP COM O AUTOLOAD
         $sql = new Sql();
         //NESTE EXEMPLO O METODO DELETE VAI CHAMAR DIRETAMENTE O METODO QUERY DO PDO PASSANDO OS VALORES DOS ATRIBUTOS PASSADOS PELA CHAMADO DO SELECT
-        $sql->query("DELETE tb_usuarios WHERE idusuario = :ID", array( ':ID'=>$this->getIdusuario()));
+        $sql->query("DELETE FROM tb_usuarios WHERE idusuario = :ID", array( ':ID'=>$this->getIdusuario()));
         //IMPORTANTE:
         //APOS DESTRUIR O REGISTRO NA BASE DE DADOS PRECISAMOS ZERAR OS VALORES GUARDADOS NOS ATRIBUTOS DA CLASSE - PARA NAO TER UMA MEMORIA DE ALGO QUE JA NAO EXISTE NO CONTEXTO DO PROGRAMA - USAMOS PARA ISSO OS METODOS SETERS CRIADOS
-        this->setIdusuario(0);
-        this->setDeslogin("");
-        this->setDessenha("");
-        this->setDtcadastro(new DateTime());
+        $this->setIdusuario(0);
+        $this->setDeslogin("");
+        $this->setDessenha("");
+        $this->setDtcadastro(new DateTime());
     }
     /////////////////////////////////////////////////////////////////////////////////////
     //          FUNCOES CONSTRUTORAS DESSA CLASSE - EXECUTAM AUTOMATICAMENTE           //
@@ -162,10 +175,11 @@ class DBTbUsuarios {
 
     //IMPORTANTE:
     //METODO CONSTRUTOR PARA SETAR OS ATRIBUTOS DESLOGIN E DESSENHA - E PARA NAO AFETAR AS OUTRAS CHAMADAS DE FUNCAO - NAO TORNANDO OBRIGATORIO OS PARAMETROS PARA OS OUTROS METODOS!!!!!!!!! ESSA FUNCAO ALIMENTA ESSES DOIS ATRIBUTOS AUTOMATICAMENTE
-    public function __construct($login = "", $passwd = ""){
-        $this->setDeslogin($login);
-        $this->setDessenha($passwd);
-    }
+    //FIXME: TEM ALGUMA COISA ERRADA COM ESSE METODO
+    #public function __construct($login = "", $passwd = ""){
+    #    $this->setDeslogin($login);
+    #    $this->setDessenha($passwd);
+    #}
     //METODO RETORNA JSON - OBJETO - STRING
     //VAMOS CRIAR UMA CLASSE PARA LER OS ATRIBUTOS (GETERS) PREENCHIDOS PELO METODO SETERS DO SELECT - USAREMOS O METODO MAGICO --TOSTRING PARA TRATAR O ARRAY DE RESPOSTA E VAMOS CHAMAR O JSON PARA TRANSFORMAR O OBJETO EM UMA STRING MAIS FACIL DE TRATAR NO FRONT-END
     public function __toString(){
@@ -174,7 +188,7 @@ class DBTbUsuarios {
             "idusuario"=>$this->getIdusuario(),
             "deslogin"=>$this->getDeslogin(),
             "dessenha"=>$this->getDessenha(),
-            "dtcadastro"=>$this->getDtcadastro()=>format("d/m/Y H:i:s")
+            "dtcadastro"=>$this->getDtcadastro()->format("d/m/Y H:i:s")
         ));
     }
 }
