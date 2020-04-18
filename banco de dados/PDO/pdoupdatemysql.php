@@ -16,9 +16,9 @@ $conn = new PDO("mysql:dbname=dbphp7;host=localhost","user","senha");
 //PDO TAMBEM É MELHOR COM O SQLINJECTION
 //O SQL TRATA ESSES COMANDOS EM LOTE, PODERIA COLOCAR MAIS :COMANDO... QUE ELE EXECUTA!
 $stmt = $conn->prepare("UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :PASSWORD WHERE idusuario = :ID");
-$login = "Joao";
-$password = "quety12@#";
-$id = 2;
+$login = "Carol da Silva";
+$password = "%$644grfty";
+$id = 3;
 //IMPORTANTE:
 //BIND - LIGAR - LIGA PARAMETROS COM VALORES - FAZER PARA TODOS OS PARAMETROS - KEYSENSITIVE
 $stmt->bindParam(":LOGIN", $login); #liga a variavel $login ao ID :LOGIN

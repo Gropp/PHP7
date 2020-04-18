@@ -19,7 +19,7 @@ $conn->beginTransaction();
 //PDO TAMBEM É MELHOR COM O SQLINJECTION
 //TAMBEM PODEMOS COMO NO MYSQLI USAR ? NOS PARAMETROS
 //PODERIAMOS PASSAR MAIS PARAMETROS ? ? COLOCA OS ? COM ESPACOS, CADA ? É UM ARGUMENTO!
-$stmt = $conn->prepare("DELETE FROM tb_usuarios WHERE idusuarios = ?");
+$stmt = $conn->prepare("DELETE FROM tb_usuarios WHERE idusuario = ?");
 //VARIAVEL DO WHERE
 $id = 2;
 //IMPORTANTE:

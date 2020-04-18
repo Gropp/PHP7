@@ -15,9 +15,9 @@ $conn = new PDO("mysql:dbname=dbphp7;host=localhost","user","senha");
 //PREPARE DO COMANDO DELETE
 //PDO TAMBEM É MELHOR COM O SQLINJECTION
 //O SQL TRATA ESSES COMANDOS EM LOTE, PODERIA COLOCAR MAIS :COMANDO... QUE ELE EXECUTA!
-$stmt = $conn->prepare("DELETE FROM tb_usuarios WHERE idusuarios = :ID");
+$stmt = $conn->prepare("DELETE FROM tb_usuarios WHERE idusuario = :ID");
 //VARIAVEL DO WHERE
-$id = 1;
+$id = 7;
 //IMPORTANTE:
 //BIND - LIGAR - LIGA PARAMETROS COM VALORES - FAZER PARA TODOS OS PARAMETROS - KEYSENSITIVE
 $stmt->bindParam(":ID", $id); #liga a variavel $id ao ID :ID

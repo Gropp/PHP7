@@ -16,7 +16,7 @@ $conn = new PDO("mysql:dbname=dbphp7;host=localhost","user","senha");
 //PDO TAMBEM É MELHOR COM O SQLINJECTION
 //O SQL TRATA ESSES COMANDOS EM LOTE, PODERIA COLOCAR MAIS :COMANDO... QUE ELE EXECUTA!
 $stmt = $conn->prepare("INSERT INTO tb_usuarios (deslogin, dessenha) VALUES(:LOGIN, :PASSWORD)");
-$login = "Jose";
+$login = "Jose da Silva";
 $password = "12334562#%@3%!";
 //IMPORTANTE:
 //BIND - LIGAR - LIGA PARAMETROS COM VALORES - FAZER PARA TODOS OS PARAMETROS - KEYSENSITIVE
